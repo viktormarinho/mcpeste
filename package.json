@@ -1,7 +1,7 @@
 {
     "type": "module",
     "name": "mcpeste",
-    "version": "0.0.5",
+    "version": "0.0.6",
     "description": "Test mcp tools in the command line",
     "main": "index.ts",
     "bin": {
