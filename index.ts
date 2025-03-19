@@ -6,8 +6,6 @@ import inquirer from "inquirer";
 import { generateObject, jsonSchema } from "ai";
 import { anthropic } from "@ai-sdk/anthropic";
 
-const model = anthropic("claude-3-5-sonnet-20240620");
-
 // Parse command line arguments
 function parseArgs() {
   const args = process.argv.slice(2);
@@ -162,6 +160,21 @@ async function testTool(client: Client) {
     ]);
 
     if (usePrompt) {
+      // Check if ANTHROPIC_API_KEY is set
+      if (!process.env.ANTHROPIC_API_KEY) {
+        const { apiKey } = await inquirer.prompt([
+          {
+            type: 'password',
+            name: 'apiKey',
+            message: 'Please enter your Anthropic API key:',
+            validate: (input) => input.length > 0 ? true : 'API key is required'
+          }
+        ]);
+        
+        // Set the API key for this session
+        process.env.ANTHROPIC_API_KEY = apiKey;
+      }
+      
       const { prompt } = await inquirer.prompt([
         {
           type: 'input',
@@ -169,6 +182,8 @@ async function testTool(client: Client) {
           message: 'Enter a prompt to fill in the parameters:',
         }
       ]);
+
+      const model = anthropic("claude-3-7-sonnet-latest");
 
       const { object } = await generateObject({
         model,
