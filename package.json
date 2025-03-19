@@ -1,0 +1,24 @@
+{
+    "type": "module",
+    "name": "mcpeste",
+    "version": "0.0.2",
+    "description": "Test mcp tools in the command line",
+    "main": "index.ts",
+    "bin": {
+        "mcpeste": "./index.ts"
+    },
+    "scripts": {
+        "start": "tsx index.ts"
+    },
+    "dependencies": {
+        "@ai-sdk/anthropic": "^1.1.18",
+        "@modelcontextprotocol/sdk": "^1.7.0",
+        "ai": "^4.1.63",
+        "inquirer": "^12.5.0",
+        "tsx": "4.19.0",
+        "typescript": "^5.3.3"
+    },
+    "devDependencies": {
+        "@types/node": "^22.13.10"
+    }
+}
